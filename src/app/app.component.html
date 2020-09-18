@@ -1,21 +1,71 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- -----------------------------navigation bar------------------------------- -->
+  <div class="topnav">
+    <a class="active" href="#home">Summay Data</a>
+  
+    <div class="search-container">
+      <form >
+        <input type="text" placeholder="Search by resturant.." name="search" [(ngModel)]="searchitem" (ngModelChange)="search()">
+        <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
+    </div>
+    <div style="left:50%;">
+      <ng-multiselect-dropdown
+    [placeholder]="'custom placeholder'"
+    [data]="dropdownList"
+    [(ngModel)]="selectedItems"
+    [settings]="dropdownSettings"
+    (onSelect)="onItemSelect($event)"
+    (onSelectAll)="onSelectAll($event)"
+   (onDeSelect) ="onDeSelect($event)"
+  >
+  </ng-multiselect-dropdown>
+    </div>
+    
+  </div>
+  <!-- ----------x-------------------navigation bar-------------x------------------ -->
+
+  <!-- ------------------------data table-------------------------------------------- -->
+  
+  <div class="card-container">
+    <div style="overflow-x:auto;">
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>city</th>
+      <th (click)="sort(rating)">Rating</th>
+      <th>Address</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>PostalCode</th>
+      <th>Phones</th>
+      <th>Websites</th>
+    </tr>
+    <tr *ngFor="let resturant of finalData">
+      <td>{{resturant.name}}</td>
+      <td>{{resturant.city}}</td>
+      <td>{{resturant.averageRating|roundRating}}</td>
+      <td>{{resturant.address}}</td>
+      <td>{{resturant.latitude}}</td>
+      <td>{{resturant.longitude}}</td>
+      <td>{{resturant.postalCode}}</td>
+      <td>{{resturant.phones[0]}}</td>
+      <td>{{resturant.websites[0]}}</td>
+      
+    </tr>
+  </table>
+  <!-- -----------x-------------data table---------------------x----------------------- -->
+   
+    </div>
+  </div>
+</body>
+</html>
 
 <router-outlet></router-outlet>
